@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+
 import {
   DeviceEventEmitter, // android
   NativeAppEventEmitter, // ios
@@ -6,8 +8,8 @@ import {
   Platform,
   StyleSheet,
   requireNativeComponent,
-  View,
   findNodeHandle,
+  ViewPropTypes,
 } from 'react-native';
 
 const CameraManager = NativeModules.CameraManager || NativeModules.CameraModule;
@@ -42,7 +44,7 @@ function convertNativeProps(props) {
   if (typeof props.captureMode === 'string') {
     newProps.captureMode = Camera.constants.CaptureMode[props.captureMode];
   }
-  
+
   if (typeof props.captureTarget === 'string') {
     newProps.captureTarget = Camera.constants.CaptureTarget[props.captureTarget];
   }
@@ -72,7 +74,7 @@ export default class Camera extends Component {
   };
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     aspect: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number
